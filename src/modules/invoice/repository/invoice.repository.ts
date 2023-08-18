@@ -1,4 +1,5 @@
 import Address from "../../@shared/domain/value-object/address.value-object";
+import Id from "../../@shared/domain/value-object/id.value-object";
 import InvoiceItem from "../domain/invoice-item";
 import Invoice from "../domain/invoice.entity";
 import InvoiceGateway from "../gateway/invoice.gateway";
@@ -8,7 +9,7 @@ import { InvoiceModel } from "./invoice.model";
 
 export default class InvoiceRepository implements InvoiceGateway {
    async generate(entity: Invoice): Promise<void> {
-        await InvoiceModel.create(
+        const invoiceReturned = await InvoiceModel.create(
             {
                 id: entity.id.id,
                 name: entity.name,
@@ -31,6 +32,8 @@ export default class InvoiceRepository implements InvoiceGateway {
                 include: [{ model: InvoiceItemModel }],
             }
         );
+
+        console.log("INVOICE SALVO NO BD", invoiceReturned);
     }
 
     async find(id: string): Promise<Invoice> {
@@ -50,6 +53,7 @@ export default class InvoiceRepository implements InvoiceGateway {
         const auxAddress = new Address(invoiceModel.street, invoiceModel.number_address, invoiceModel.zip, invoiceModel.city, invoiceModel.state, invoiceModel.complement);
 
         const props = {
+            id: new Id(invoiceModel.id),
             name: invoiceModel.name,
             document: invoiceModel.document,
             address: auxAddress,

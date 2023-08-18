@@ -20,10 +20,11 @@ export default class GenerateInvoiceUseCase {
     const auxAddress = new Address(input.street, input.number, input.zipCode, input.city, input.state, input.complement);
 
     const props = {
+        id: new Id(input.id) || new Id(),
         name: input.name,
         document: input.document,
         address: auxAddress,
-        items: input.items.map((item) => ( new InvoiceItem( {  name: item.name, price: item.price})))
+        items: input.items.map((item) => ( new InvoiceItem( { id: new Id(item.id),  name: item.name, price: item.price})))
     };
     
   
@@ -36,7 +37,7 @@ export default class GenerateInvoiceUseCase {
         price: item.price
       }));
 
-    const auxTotal = invoice.items.map((item) => item.price).reduce((total, price) => total + price);
+    const auxTotal =  invoice.items.map((item) => item.price).reduce((partialSum, a) => partialSum + a, 0); 
     
 
     return {

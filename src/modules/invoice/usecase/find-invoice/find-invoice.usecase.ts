@@ -23,7 +23,7 @@ export default class FindInvoiceUseCase {
       state: invoice.address.state,
       zipCode: invoice.address.zip,
       items: invoice.items.map((item) => ({ id: item.id.id, name: item.name, price: item.price})),
-      total:  invoice.items.map((item) => item.price).reduce((total, price) => total + price),
+      total:  invoice.items.map((item) => item.price).reduce((partialSum, a) => partialSum + a, 0),
       createdAt: invoice.createdAt,
       updatedAt: invoice.updatedAt,
     };

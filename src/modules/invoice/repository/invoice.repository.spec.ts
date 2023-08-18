@@ -8,7 +8,7 @@ import InvoiceRepository from "./invoice.repository";
 import Id from "../../@shared/domain/value-object/id.value-object";
 
 
-describe("ClientRepository test", () => {
+describe("InvoiceRepository test", () => {
     let sequelize: Sequelize;
   
     beforeEach(async () => {
@@ -30,6 +30,7 @@ describe("ClientRepository test", () => {
     it("should add and find a invoice", async () => {
  
         const input = {
+            id: new Id("1"),
             name: "Nota Fiscal Test1",
             document: "NF de compra",
             street: "Rua Brasil", 
@@ -50,7 +51,7 @@ describe("ClientRepository test", () => {
         const auxAddress = new Address(input.street, input.number, input.zipCode, input.city, input.state, input.complement);
 
         const props = {
-            id: new Id("1"),
+            id: input.id,
             name: input.name,
             document: input.document,
             address: auxAddress,

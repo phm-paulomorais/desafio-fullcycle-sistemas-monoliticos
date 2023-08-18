@@ -1,4 +1,4 @@
-export interface GenerateInvoiceUseCaseInputDto {
+export interface GenerateInvoiceFacadeInputDto {
     id?: string;
     name: string;
     document: string;
@@ -15,7 +15,11 @@ export interface GenerateInvoiceUseCaseInputDto {
     }[];
   }
   
-  export interface GenerateInvoiceUseCaseOutputDto {
+export interface FincInvoiceFacadeInputDto {
+    id: string;
+}
+
+export interface FindInvoiceFacadeOutputDto {
     id: string;
     name: string;
     document: string;
@@ -31,4 +35,11 @@ export interface GenerateInvoiceUseCaseInputDto {
       price: number;
     }[];
     total: number;
-  }
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export default interface InvoiceFacadeInterface {
+    generate(input: GenerateInvoiceFacadeInputDto): Promise<void>;
+    find(input: FincInvoiceFacadeInputDto): Promise<FindInvoiceFacadeOutputDto>;
+}
