@@ -13,6 +13,7 @@ describe("Add Client Usecase unit test", () => {
     const usecase = new AddClientUseCase(repository);
 
     const input = {
+      id: "1",
       name: "Client 1",
       email: "x@x.com",
       address: "Address 1",
