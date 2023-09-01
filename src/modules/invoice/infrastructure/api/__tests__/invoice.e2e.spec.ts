@@ -60,7 +60,7 @@ describe("E2E test for invoices", () => {
 
 
     const responseInvoices = await request(app)
-      .post("/invoice/1")
+      .get("/invoice/1")
       .send();
 
     expect(responseInvoices.status).toBe(200);

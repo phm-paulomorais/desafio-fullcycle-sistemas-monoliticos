@@ -4,7 +4,7 @@ import InvoiceRepository from "../../../repository/invoice.repository";
 
 export const invoiceRoute = express.Router();
 
-invoiceRoute.post("/:id", async (req: Request, res: Response) => {
+invoiceRoute.get("/:id", async (req: Request, res: Response) => {
   const usecase = new FindInvoiceUseCase(new InvoiceRepository());
   try {
     const fincInvoiceInputDto = {
